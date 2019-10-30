@@ -5,9 +5,10 @@ function [ erc ] = ERC( Phi,lambda )
 %    Inputs
 %       Phi : dictionary matrix [D x N], D is the number of dimension, and
 %       N is the number of atoms
-%    Outputs
 %       lambda : subset indices of columns of Phi [1 x N] array of binary
 %       elements or [1 x n] (n<N) integer indices
+%    Outputs
+%       erc: scalar, exact recovery coefficient
 
 [D,N] = size(Phi);
 

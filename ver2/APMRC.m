@@ -1,8 +1,8 @@
 function [ apmrc,mcc,nscc,opt_stats ] = APMRC( Y,A,gamma,Gamma )
-% [ accept ] = percBasedSufCnd( S,A,gamma,Gamma )
+% [ apmrc,mcc,nscc,opt_stats ] = APMRC( Y,A,gamma,Gamma )
 %
 % This function tests the approximately perfect model recoverty condition 
-% (APMRC) of the paratially Lagrangian form of non-negative lasso 
+% (APMRC) of the partially Lagrangian form of non-negative lasso 
 % (PL-Nlasso):-
 %
 %      minimize         1/2||y-Ax||^2 + gamma*1^T*x
@@ -28,8 +28,8 @@ function [ apmrc,mcc,nscc,opt_stats ] = APMRC( Y,A,gamma,Gamma )
 %     A : the dictionary matrix [L,N] each column vectors ar atoms. N is
 %         the number of atoms in the dictionary.
 %     gamma : scalar, the trade-off parameter for PL-NLasso
-%     Gamma : the set of indices (boolean with size [1,p] or integers 
-%           in the range[1,p])
+%     Gamma : the set of indices (boolean with size [1,N] or integers 
+%             in the range[1,N])
 %  Returns
 %     apmrc : boolean array [1,M]: True->the conditions are met False->not
 %     mcc   : boolean array [1 M]: show whether MCC holds for each point.
@@ -52,6 +52,15 @@ function [ apmrc,mcc,nscc,opt_stats ] = APMRC( Y,A,gamma,Gamma )
 %           pnonliniearityj: [Nc,M], AGcmp'*PG_ort*Y.
 %           nsccfull:        [Nc,M], the elementwise outcome of NSCC
 %
+%
+%   REFERENCE
+%     Y. Itoh, M. F. Duarte and M. Parente, "Perfect Recovery Conditions 
+%     for Non-negative Sparse Modeling," in IEEE Transactions on Signal 
+%     Processing, vol. 65, no. 1, pp. 69-80, 1 Jan.1, 2017.
+%     doi: 10.1109/TSP.2016.2613067
+%   
+%   Copyright © 2019 Yuki Itoh
+
 
 %% check the validity of the input parameters
 if size(Y,1) ~= size(A,1)

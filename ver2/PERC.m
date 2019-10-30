@@ -1,22 +1,38 @@
 function [ perc ] = PERC( A,Gamma )
-% [ perc ] = PERC( Phi,lambda )
-%   compute the positive exact recovery coefficient
-%   PERC = 
+% [ perc ] = PERC( A,Gamma )
+%   compute the positive exact recovery coefficient (PERC)
+%     PERC(Gamma) =      min      1-sum(pinv(AG)*Aj)
+%                    j \in Gcmp  |__________________|
+%                                         ||
+%                                         \/
+%                                     PSC(Gamma;j)
+%   where PSC is (positive subset coherence).
+%
 %    Inputs
-%       Phi : dictionary matrix [D x N], D is the number of dimension, and
-%       N is the number of atoms
+%       A : Matrix [L x N] of atoms, L is the number of dimension, and
+%           N is the number of atoms
+%       Gamma: the set of indices (boolean with size [1,N] or integers 
+%              in the range[1,N])
 %    Outputs
-%       lambda : subset indices of columns of Phi [1 x N] array of binary
-%       elements or [1 x n] (n<N) integer indices
+%       perc: scalar, positive exact recovery coefficient
+%
+%   REFERENCE
+%     Y. Itoh, M. F. Duarte and M. Parente, "Perfect Recovery Conditions 
+%     for Non-negative Sparse Modeling," in IEEE Transactions on Signal 
+%     Processing, vol. 65, no. 1, pp. 69-80, 1 Jan.1, 2017.
+%     doi: 10.1109/TSP.2016.2613067
+%   
+%   Copyright © 2019 Yuki Itoh
 
-[D,N] = size(A);
+
+[L,N] = size(A);
 
 if islogical(Gamma)
     Gamma = find(Gamma);
     Gamma = reshape(Gamma,1,length(Gamma));
 end
 
-if D<length(Gamma)
+if L<length(Gamma)
     error(['Subset size is too large']);
 end
 
