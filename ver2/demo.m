@@ -58,3 +58,4 @@ fprintf('APMRC matches        %3.0f %% to the numerical recovery result.\n',100*
 fprintf('PERCAMAX MRC matches %3.0f %% to the numerical recovery result.\n',100*mean(percamax_mrc==numer_recovry_result));
 fprintf('PERCMAX MRC matches  %3.0f %% to the numerical recovery result.\n',100*mean(percmax_mrc==numer_recovry_result));
 fprintf('ERC MRC matches      %3.0f %% to the numerical recovery result.\n',100*mean(erc_mrc==numer_recovry_result));
+% You should see APMRC always yields 100%.
